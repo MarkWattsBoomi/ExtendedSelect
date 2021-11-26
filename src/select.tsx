@@ -134,8 +134,7 @@ export default class ExtendedSelect extends React.Component<any,any> {
                         }
 
                     } else {
-                        element.querySelector('.dropdown-menu')
-                            .addEventListener('scroll', this.debouncedOnScroll);
+                        element.querySelector('.dropdown-menu')?.addEventListener('scroll', this.debouncedOnScroll);
                     }
                 },
                 10,
