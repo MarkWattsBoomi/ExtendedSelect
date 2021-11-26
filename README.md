@@ -62,6 +62,33 @@ Optional.
 The name of an outcome, attached to the combo box, to be triggered when the combo's value is cleared.
 
 
+# ExtendedToggle
+
+
+## Functionality
+
+Provides all the standard function, look & feel of the OOB toggle but with the addition of: -
+
+### onChange event
+
+When the toggle state changes, if there's an attached outcome named in the onChange attribute then it will be triggered.
+
+If the outcome is not defined then a normal event will be triggered to run the page conditions.
+
+
+
+## Component Attributes
+
+### onChange
+String.
+
+Optional.
+
+The name of an outcome, attached to the toggle, to be triggered when the toggle state changes.
+
+
+
+
 
 
 
