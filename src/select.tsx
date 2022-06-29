@@ -1,4 +1,4 @@
-import { FlowComponent, FlowObjectData } from 'flow-component-model';
+import { eLoadingState, FlowComponent, FlowObjectData } from 'flow-component-model';
 import * as React from 'react';
 
 declare const manywho: any;
@@ -63,7 +63,15 @@ export default class ExtendedSelect extends FlowComponent {
             this.triggerOutcome(outcomeName);
         }
         else {
-            manywho.component.handleEvent(this, null, this.flowKey)
+            manywho.component.handleEvent(
+                this,
+                manywho.model.getComponent(
+                    this.componentId,
+                    this.flowKey,
+                ),
+                this.flowKey,
+                null,
+            );
         }
     }
 
@@ -94,7 +102,7 @@ export default class ExtendedSelect extends FlowComponent {
                     value={""}
                     selected={true}
                 >
-                    {"Please select a project"}
+                    {this.getAttribute("noSelection","Please select ...")}
                 </option>
             );
         }
@@ -113,13 +121,16 @@ export default class ExtendedSelect extends FlowComponent {
 
     
     render() {
-        
-        let className = manywho.styling.getClasses(
-            this.props.parentId,
-            this.props.id,
-            'select',
-            this.props.flowKey,
-        ).join(' ');
+        let className: string = "";
+
+        if(this.loadingState === eLoadingState.ready) {
+            let className = manywho.styling.getClasses(
+                this.parentId,
+                this.componentId,
+                'select',
+                this.flowKey,
+            ).join(' ');
+        }
 
         className += ' form-group';
 
