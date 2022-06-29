@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-//const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const flow = require('./package.json').flow
 module.exports = function() {
     const config = {
@@ -26,13 +26,24 @@ module.exports = function() {
                     test: /.js$/, 
                     enforce: 'pre', 
                     loader: 'source-map-loader'
+                },
+                { 
+                    test:/\.css$/,
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        "css-loader"
+                      ]
                 }
             ]
         },
         externals: {
             'react': 'React',
             'react-dom': 'ReactDOM'
-        }
+        },
+        plugins: [
+            //new WriteFilePlugin(),
+            new MiniCssExtractPlugin({ filename: flow.filenames.css })
+        ],
     }
     if (!fs.existsSync('./build'))
         fs.mkdirSync('./build');
