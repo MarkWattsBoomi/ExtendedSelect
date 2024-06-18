@@ -123,13 +123,18 @@ export default class ExtendedSelect extends FlowComponent {
     render() {
         let className: string = "";
 
-        if(this.loadingState === eLoadingState.ready) {
-            let className = manywho.styling.getClasses(
-                this.parentId,
-                this.componentId,
-                'select',
-                this.flowKey,
-            ).join(' ');
+        try{
+            if(this.loadingState === eLoadingState.ready) {
+                let className = manywho.styling.getClasses(
+                    this.parentId,
+                    this.componentId,
+                    'select',
+                    this.flowKey,
+                ).join(' ');
+            }
+        }
+        catch(e: any){
+            //do nothing
         }
 
         className += ' form-group';
